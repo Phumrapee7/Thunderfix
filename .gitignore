@@ -1,0 +1,8 @@
+# User-uploaded content (runtime data, not source)
+uploads/profile_images/*
+!uploads/profile_images/default-profile.png
+!uploads/profile_images/.gitkeep
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

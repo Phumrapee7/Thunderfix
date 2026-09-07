@@ -1,0 +1,17 @@
+<?php
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbname = 'thunderfix';
+
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// ตั้งค่า charset ให้รองรับภาษาไทย
+$conn->set_charset("utf8");
+?>
