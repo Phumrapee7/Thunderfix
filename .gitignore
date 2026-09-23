@@ -3,6 +3,9 @@ uploads/profile_images/*
 !uploads/profile_images/default-profile.png
 !uploads/profile_images/.gitkeep
 
+# Local DB credentials — copy db/config.example.php to db/config.php and fill in real values
+db/config.php
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
