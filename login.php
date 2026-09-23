@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($row2 = $result2->fetch_assoc()) {
         if (password_verify($password, $row2['password'])) {
+            session_regenerate_id(true); // ออก session ID ใหม่ตอน login สำเร็จ กัน session fixation
             $_SESSION['user_id'] = $row2['id'];
             $_SESSION['role'] = 'technician';
             header("Location: technician_profile.php?id=" . $row2['id']);
@@ -43,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row['password'])) {
+            session_regenerate_id(true); // ออก session ID ใหม่ตอน login สำเร็จ กัน session fixation
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['role'] = 'user';
             header("Location: dashboard.php");
