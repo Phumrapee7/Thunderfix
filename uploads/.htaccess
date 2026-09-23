@@ -1,0 +1,29 @@
+# User-uploaded files only — never let this directory (or any subfolder,
+# e.g. profile_images/, cover_images/) execute server-side scripts, even if
+# something ever slips past the upload validation in edit_profile.php.
+
+<FilesMatch "\.(php|phtml|php[0-9]|pht|phar|cgi|pl|py|sh|asp|aspx|jsp)$">
+    Require all denied
+</FilesMatch>
+
+# Apache 2.2 fallback syntax, in case mod_authz_core isn't loaded
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(php|phtml|php[0-9]|pht|phar|cgi|pl|py|sh|asp|aspx|jsp)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Belt and suspenders: turn the PHP engine off outright for this tree
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# No directory listing
+Options -Indexes
