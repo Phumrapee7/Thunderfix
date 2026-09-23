@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $phone = $_POST['phone'];
-  $specialty = $_POST['specialty'];
+  $tech_type = $_POST['tech_type'];
   $lat = $_POST['lat'];
   $lng = $_POST['lng'];
   $password_raw = $_POST['password'];
@@ -38,9 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if ($rs->num_rows > 0) {
         $error = "อีเมลนี้มีช่างใช้แล้ว!";
       } else {
-        $sql = $conn->prepare("INSERT INTO technicians(name,email,password,phone,specialty,lat,lng)
+        $latitude = (string)(float)$lat;
+        $longitude = (string)(float)$lng;
+        $sql = $conn->prepare("INSERT INTO technicians(name,email,password,phone,tech_type,latitude,longitude)
                                    VALUES (?,?,?,?,?,?,?)");
-        $sql->bind_param("sssssss", $name, $email, $password, $phone, $specialty, $lat, $lng);
+        $sql->bind_param("sssssss", $name, $email, $password, $phone, $tech_type, $latitude, $longitude);
         if ($sql->execute()) {
           $success = "สมัครเป็นช่างสำเร็จ! กรุณาเข้าสู่ระบบ.";
         } else {
@@ -139,11 +141,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       <div style="position: relative;">
         <span class="form-icon">🛠</span>
-        <select name="specialty" class="form-control" required>
-          <option value="ช่างไฟฟ้า">ช่างไฟฟ้า</option>
-          <option value="ช่างแอร์">ช่างแอร์</option>
-          <option value="ช่างประปา">ช่างประปา</option>
-          <option value="ช่างซ่อมคอม">ช่างซ่อมคอม</option>
+        <select name="tech_type" class="form-control" required>
+          <option value="ไฟฟ้า">ไฟฟ้า</option>
+          <option value="ประปา">ประปา</option>
+          <option value="แอร์">แอร์</option>
+          <option value="ช่างทั่วไป">ช่างทั่วไป</option>
+          <option value="บิ้วอิน/เฟอร์นิเจอร์">บิ้วอิน/เฟอร์นิเจอร์</option>
+          <option value="สี/ทาสี">สี/ทาสี</option>
+          <option value="หลังคา/กันรั่ว">หลังคา/กันรั่ว</option>
           <option value="อื่นๆ">อื่นๆ</option>
         </select>
       </div>

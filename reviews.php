@@ -66,7 +66,7 @@ $reviews = $stmt_r->get_result();
     <div class="card mb-4">
         <div class="card-body">
             <h3><?php echo htmlspecialchars($tech['name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-            <p>ประเภท: <?php echo htmlspecialchars($tech['specialty'], ENT_QUOTES, 'UTF-8'); ?> | เบอร์: <?php echo htmlspecialchars($tech['phone'], ENT_QUOTES, 'UTF-8'); ?></p>
+            <p>ประเภท: <?php echo htmlspecialchars($tech['tech_type'] ?: 'ไม่ระบุ', ENT_QUOTES, 'UTF-8'); ?> | เบอร์: <?php echo htmlspecialchars($tech['phone'], ENT_QUOTES, 'UTF-8'); ?></p>
         </div>
     </div>
 

@@ -20,10 +20,10 @@ error_log("Received lat=$lat, lng=$lng, dist=$dist");
 
 function haversine_sql($lat, $lng)
 {
-    return "(6371 * acos(cos(radians($lat)) * cos(radians(lat)) * cos(radians(lng) - radians($lng)) + sin(radians($lat)) * sin(radians(lat))))";
+    return "(6371 * acos(cos(radians($lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($lng)) + sin(radians($lat)) * sin(radians(latitude))))";
 }
 
-$sql = "SELECT id, name, specialty, phone, lat, lng, " . haversine_sql($lat, $lng) . " AS distance
+$sql = "SELECT id, name, tech_type, phone, latitude, longitude, " . haversine_sql($lat, $lng) . " AS distance
         FROM technicians
         HAVING distance <= ?
         ORDER BY distance ASC";
